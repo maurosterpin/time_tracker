@@ -13,7 +13,7 @@ class SignInPage extends StatelessWidget {
       body: _buildContent()
     );
   }
-}
+
 
 Widget _buildContent() {
   return Padding(
@@ -24,20 +24,17 @@ Widget _buildContent() {
           children: <Widget>[
           const Text('Sign in', style: TextStyle(fontSize: 35, fontWeight: FontWeight.w600),textAlign: TextAlign.center,),
           const SizedBox(height: 8,),
-          Container(
-            color: Colors.red,
-            child: const SizedBox(
-              height: 100,
-              ),
-          ),
-          const SizedBox(height: 8,),
-          Container(
-            color: Colors.purple,
-            child: const SizedBox(
-              height: 100,
-              ),
-          ),
-          const SizedBox(height: 8,),
+          RaisedButton(
+            child: Text('Sign in with Google'), 
+            onPressed: () {},
+            ),
         ]),
       );
+
+      
+}
+
+void _signInWithGoogle() {
+    // TODO: Auth with Google
+  }
 }
