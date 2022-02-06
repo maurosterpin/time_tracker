@@ -7,6 +7,7 @@ abstract class AuthBase {
   Stream<User?> authStateChanges();
   Future <User?> signInAnonymously();
   Future<User?> signInWithGoogle();
+  Future<User?> signInWithFacebook();
   Future<void> signOut();
 }
 
@@ -46,6 +47,7 @@ class Auth implements AuthBase {
     }
   }
 
+  @override
   Future<User?> signInWithFacebook() async {
     final fb = FacebookLogin();
     final response = await fb.logIn(permissions: [
@@ -73,6 +75,8 @@ class Auth implements AuthBase {
   Future<void> signOut() async {
     final googleSignIn = GoogleSignIn();
     await googleSignIn.signOut();
+    final facebookLogin = FacebookLogin();
+    await facebookLogin.logOut();
     await _firebaseAuth.signOut();
   }
 }
