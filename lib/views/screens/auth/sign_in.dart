@@ -28,6 +28,15 @@ Widget _buildContent() {
           children: <Widget>[
           const Text('Sign in', style: TextStyle(fontSize: 35, fontWeight: FontWeight.w600),textAlign: TextAlign.center,),
           const SizedBox(height: 48,),
+          CustomButton(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Image.asset('assets/google-logo.png'),
+                Text('Sign in with Google'),
+                Opacity(opacity: 0 ,child: Image.asset('assets/google-logo.png')),
+              ], 
+            ), color: Colors.white, onPressed: () {}),
           SignInButton(
             text: 'Sign in with Google',
             textColor: Colors.black87,
