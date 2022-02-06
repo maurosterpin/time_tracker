@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
-  const CustomButton({ Key? key, required this.child, required this.color, this.borderRadius = 5, this.height = 50, required this.onPressed }) : super(key: key);
+  const CustomButton({ Key? key, required this.child, required this.color, this.borderRadius = 5, this.height = 50, required this.onPressed }) : assert(borderRadius != null), super(key: key);
 
   final Widget child;
   final Color color;
