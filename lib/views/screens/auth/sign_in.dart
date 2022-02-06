@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:time_tracker/widgets/sign_in_button.dart';
 
 import '../../../widgets/button.dart';
+import '../../../widgets/social_sign_in_button.dart';
 
 class SignInPage extends StatelessWidget {
   const SignInPage({ Key? key }) : super(key: key);
@@ -28,24 +29,17 @@ Widget _buildContent() {
           children: <Widget>[
           const Text('Sign in', style: TextStyle(fontSize: 35, fontWeight: FontWeight.w600),textAlign: TextAlign.center,),
           const SizedBox(height: 48,),
-          CustomButton(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Image.asset('assets/google-logo.png'),
-                Text('Sign in with Google'),
-                Opacity(opacity: 0 ,child: Image.asset('assets/google-logo.png')),
-              ], 
-            ), color: Colors.white, onPressed: () {}),
-          SignInButton(
+          SocialSignInButton(
             text: 'Sign in with Google',
+            assetName: 'assets/google-logo.png',
             textColor: Colors.black87,
             color: Colors.white,
             onPressed: () {},
           ),
           SizedBox(height: 8,),
-          SignInButton(
+          SocialSignInButton(
             text: 'Sign in with Facebook',
+            assetName: 'assets/facebook-logo.png',
             textColor: Colors.white,
             color: Color(0xFF334D92),
             onPressed: () {},
