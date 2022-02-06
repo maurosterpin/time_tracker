@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:time_tracker/widgets/sign_in_button.dart';
-
 import '../../../widgets/button.dart';
 import '../../../widgets/social_sign_in_button.dart';
 
