@@ -26,12 +26,6 @@ class _LandingPageState extends State<LandingPage> {
     });
   }
 
-  void _logOutUser() {
-    setState(() {
-      _user = null;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     if(_user == null) {
@@ -40,7 +34,7 @@ class _LandingPageState extends State<LandingPage> {
         );
     } else {
       return HomePage(
-        onSignOut: _logOutUser,
+        onSignOut: () => _updateUser(null),
       );
     }
     
