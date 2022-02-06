@@ -13,10 +13,16 @@ class _LandingPageState extends State<LandingPage> {
 
   User? _user;
 
+  void _updateUser(User user) {
+    print('User id: ${user.uid}');
+  }
+
   @override
   Widget build(BuildContext context) {
     if(_user == null) {
-        return const SignInPage();
+        return SignInPage(
+          onSignIn: _updateUser,
+        );
     } else {
       return Container();
     }
