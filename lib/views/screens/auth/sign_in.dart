@@ -11,6 +11,10 @@ class SignInPage extends StatelessWidget {
     await auth.signInAnonymously();
   }
 
+  Future <void> _signInWithGoogle() async {
+    await auth.signInWithGoogle();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +42,7 @@ Widget _buildContent() {
             assetName: 'assets/google-logo.png',
             textColor: Colors.black87,
             color: Colors.white,
-            onPressed: () {},
+            onPressed: _signInWithGoogle,
           ), 
           SizedBox(height: 8,),
           SocialSignInButton(
@@ -74,8 +78,4 @@ Widget _buildContent() {
 
       
 }
-
-void _signInWithGoogle() {
-    // TODO: Auth with Google
-  }
 }
