@@ -7,7 +7,7 @@ class SignInButton extends CustomButton {
     required Color color,
     Color? textColor,
     required VoidCallback onPressed,
-  }) : super (
+  }) : assert(text !=null), super (
         child: Text(text!, style: TextStyle(color: textColor, fontSize: 15),),
         color: color,
         onPressed: onPressed,

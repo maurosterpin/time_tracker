@@ -35,7 +35,7 @@ Widget _buildContent() {
             textColor: Colors.black87,
             color: Colors.white,
             onPressed: () {},
-          ),
+          ), 
           SizedBox(height: 8,),
           SocialSignInButton(
             text: 'Sign in with Facebook',
