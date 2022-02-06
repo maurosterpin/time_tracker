@@ -14,7 +14,13 @@ class _LandingPageState extends State<LandingPage> {
 
   User? _user;
 
-  void _updateUser(User user) {
+  @override
+  void initState() {
+    super.initState();
+    _updateUser(FirebaseAuth.instance.currentUser);
+  }
+
+  void _updateUser(User? user) {
     setState(() {
       _user = user;
     });
