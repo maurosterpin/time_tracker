@@ -1,29 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:time_tracker/widgets/form_submit_button.dart';
 
 class EmailSignInForm extends StatelessWidget {
-  const EmailSignInForm({ Key? key }) : super(key: key);
+   EmailSignInForm({ Key? key }) : super(key: key);
+
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  void _submit() {
+    //TODO: print email and password
+    print('${_passwordController.text}, ${_emailController.text}');
+  }
+  
 
   List<Widget> _buildChildren() {
     return [
-      const TextField(
+      TextField(
+        controller: _emailController,
         decoration: InputDecoration(
           labelText: 'Email',
           hintText: 'test@test.com'
         ),
+        
       ),
-      const SizedBox(height: 8,),
-      const TextField(
+       SizedBox(height: 8,),
+       TextField(
+        controller: _passwordController,
         obscureText: true,
         decoration: InputDecoration(
           labelText: 'Password',
         ),
       ),
-      const SizedBox(height: 8,),
-      RaisedButton(
-        child: Text('Sign in'),
-        onPressed: () {}
+       SizedBox(height: 8,),
+      FormSubmitButton(
+        text: 'Sign in',
+        onPressed: _submit
         ),
-        const SizedBox(height: 8,),
+         SizedBox(height: 8,),
         FlatButton(
           onPressed: () {}, 
           child: Text('Need an account? Register')
