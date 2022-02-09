@@ -26,7 +26,7 @@ class SignInPage extends StatelessWidget {
         fullscreenDialog: true,
         builder: (context) => EmailSignInPage(),
         )
-    );
+    ); 
   }
 
   @override
