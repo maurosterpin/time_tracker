@@ -5,25 +5,25 @@ class EmailSignInForm extends StatelessWidget {
 
   List<Widget> _buildChildren() {
     return [
-      TextField(
+      const TextField(
         decoration: InputDecoration(
           labelText: 'Email',
           hintText: 'test@test.com'
         ),
       ),
-      SizedBox(height: 8,),
-      TextField(
+      const SizedBox(height: 8,),
+      const TextField(
         obscureText: true,
         decoration: InputDecoration(
           labelText: 'Password',
         ),
       ),
-      SizedBox(height: 8,),
+      const SizedBox(height: 8,),
       RaisedButton(
         child: Text('Sign in'),
         onPressed: () {}
         ),
-        SizedBox(height: 8,),
+        const SizedBox(height: 8,),
         FlatButton(
           onPressed: () {}, 
           child: Text('Need an account? Register')
