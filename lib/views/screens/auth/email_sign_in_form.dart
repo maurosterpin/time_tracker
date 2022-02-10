@@ -44,22 +44,9 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
     final primaryText = _formType == EmailSignInFormType.signIn ? 'Sign in' : 'Create an account';
     final secondaryText = _formType == EmailSignInFormType.signIn ? 'Need an account? Register' : 'Have an account? Sign in';
     return [
-      TextField(
-        controller: _emailController,
-        decoration: InputDecoration(
-          labelText: 'Email',
-          hintText: 'test@test.com'
-        ),
-        
-      ),
+      _buildEmailTextField(),
        SizedBox(height: 8,),
-       TextField(
-        controller: _passwordController,
-        obscureText: true,
-        decoration: InputDecoration(
-          labelText: 'Password',
-        ),
-      ),
+       _buildPasswordTextField(),
        SizedBox(height: 8,),
       FormSubmitButton(
         text: primaryText,
@@ -71,6 +58,30 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
           child: Text(secondaryText)
           )
     ];
+  }
+
+  TextField _buildPasswordTextField() {
+    return TextField(
+      controller: _passwordController,
+      obscureText: true,
+      decoration: InputDecoration(
+        labelText: 'Password',
+      ),
+      textInputAction: TextInputAction.done,
+    );
+  }
+
+  TextField _buildEmailTextField() {
+    return TextField(
+      controller: _emailController,
+      decoration: InputDecoration(
+        labelText: 'Email',
+        hintText: 'test@test.com'
+      ),
+      autocorrect: false,
+      keyboardType: TextInputType.emailAddress,
+      textInputAction: TextInputAction.next,
+    );
   }
 
   @override
