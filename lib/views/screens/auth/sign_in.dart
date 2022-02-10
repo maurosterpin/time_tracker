@@ -2,21 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:time_tracker/views/screens/auth/email_sign_in_page.dart';
 import 'package:time_tracker/widgets/sign_in_button.dart';
 import '../../../services/auth.dart';
+import '../../../services/auth_provider.dart';
 import '../../../widgets/social_sign_in_button.dart';
 
 class SignInPage extends StatelessWidget {
-  const SignInPage({ Key? key, required this.auth }) : super(key: key);
-  final AuthBase auth;
 
-  Future <void> _signInAnonymously() async {
+  Future <void> _signInAnonymously(BuildContext context) async {
+    final auth = AuthProvider.of(context);
     await auth.signInAnonymously();
   }
 
-  Future <void> _signInWithGoogle() async {
+  Future <void> _signInWithGoogle(BuildContext context) async {
+    final auth = AuthProvider.of(context);
     await auth.signInWithGoogle();
   }
 
-   Future <void> _signInWithFacebook() async {
+   Future <void> _signInWithFacebook(BuildContext context) async {
+     final auth = AuthProvider.of(context);
     await auth.signInWithFacebook();
   }
 
@@ -24,7 +26,7 @@ class SignInPage extends StatelessWidget {
     Navigator.of(context).push(
       MaterialPageRoute<void>(
         fullscreenDialog: true,
-        builder: (context) => EmailSignInPage(auth: auth,),
+        builder: (context) => EmailSignInPage(),
         )
     ); 
   }
@@ -56,7 +58,7 @@ Widget _buildContent(BuildContext context) {
             assetName: 'assets/google-logo.png',
             textColor: Colors.black87,
             color: Colors.white,
-            onPressed: _signInWithGoogle,
+            onPressed: () => _signInWithGoogle(context),
           ), 
           SizedBox(height: 8,),
           SocialSignInButton(
@@ -64,7 +66,7 @@ Widget _buildContent(BuildContext context) {
             assetName: 'assets/facebook-logo.png',
             textColor: Colors.white,
             color: Color(0xFF334D92),
-            onPressed: _signInWithFacebook,
+            onPressed: () => _signInWithFacebook(context),
           ),
           SizedBox(height: 8,),
           SignInButton(
@@ -85,7 +87,7 @@ Widget _buildContent(BuildContext context) {
             text: 'Go Anonymus',
             textColor: Colors.black,
             color: Colors.lime,
-            onPressed: _signInAnonymously,
+            onPressed: () => _signInAnonymously(context),
           ),
         ]),
       );
