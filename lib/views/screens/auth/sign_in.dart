@@ -7,7 +7,13 @@ import 'package:time_tracker/widgets/sign_in_button.dart';
 import '../../../services/auth.dart';
 import '../../../widgets/social_sign_in_button.dart';
 
-class SignInPage extends StatelessWidget {
+class SignInPage extends StatefulWidget {
+  @override
+  State<SignInPage> createState() => _SignInPageState();
+}
+
+class _SignInPageState extends State<SignInPage> {
+  bool _isLoading = false;
   void _showSignInError(BuildContext context, Exception exception) {
     if (exception is FirebaseException && exception.code != 'ERROR_ABORTED_BY_USER') {
     showExceptionAlertDialog(context, title: 'Sign in failed', exception: exception);
@@ -16,28 +22,37 @@ class SignInPage extends StatelessWidget {
 
   Future <void> _signInAnonymously(BuildContext context) async {
     try {
+      setState(() => _isLoading = true);
     final auth = Provider.of<AuthBase>(context, listen: false);
     await auth.signInAnonymously();
     } on Exception catch (e) {
       _showSignInError(context, e);
+    } finally {
+      setState(() => _isLoading = false);
     }
   }
 
   Future <void> _signInWithGoogle(BuildContext context) async {
     try {
+      setState(() => _isLoading = true);
     final auth = Provider.of<AuthBase>(context, listen: false);
     await auth.signInWithGoogle();
     } on Exception catch (e) {
       _showSignInError(context, e);
+    } finally {
+      setState(() => _isLoading = false);
     }
   }
 
    Future <void> _signInWithFacebook(BuildContext context) async {
      try {
+       setState(() => _isLoading = true);
      final auth = Provider.of<AuthBase>(context, listen: false);
     await auth.signInWithFacebook();
     } on Exception catch (e) {
       _showSignInError(context, e);
+    } finally {
+      setState(() => _isLoading = false);
     }
   }
 
@@ -62,7 +77,6 @@ class SignInPage extends StatelessWidget {
     );
   }
 
-
 Widget _buildContent(BuildContext context) {
   return Padding(
         padding: EdgeInsets.all(16),
@@ -70,14 +84,14 @@ Widget _buildContent(BuildContext context) {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-          const Text('Sign in', style: TextStyle(fontSize: 35, fontWeight: FontWeight.w600),textAlign: TextAlign.center,),
+            SizedBox(height: 50,child: _buildHeader()),
           const SizedBox(height: 48,),
           SocialSignInButton(
             text: 'Sign in with Google',
             assetName: 'assets/google-logo.png',
             textColor: Colors.black87,
             color: Colors.white,
-            onPressed: () => _signInWithGoogle(context),
+            onPressed: _isLoading ? () => null : () => _signInWithGoogle(context),
           ), 
           SizedBox(height: 8,),
           SocialSignInButton(
@@ -85,14 +99,14 @@ Widget _buildContent(BuildContext context) {
             assetName: 'assets/facebook-logo.png',
             textColor: Colors.white,
             color: Color(0xFF334D92),
-            onPressed: () => _signInWithFacebook(context),
+            onPressed: _isLoading ? () => null : () => _signInWithFacebook(context),
           ),
           SizedBox(height: 8,),
           SignInButton(
             text: 'Sign in with Email',
             textColor: Colors.white,
             color: Color.fromARGB(255, 51, 146, 87),
-            onPressed: () => _signInWithEmail(context),
+            onPressed: _isLoading ? () => null : () => _signInWithEmail(context),
           ),
           SizedBox(height: 8,),
           Text(
@@ -106,11 +120,21 @@ Widget _buildContent(BuildContext context) {
             text: 'Go Anonymus',
             textColor: Colors.black,
             color: Colors.lime,
-            onPressed: () => _signInAnonymously(context),
+            onPressed: _isLoading ? () => null : () => _signInAnonymously(context),
           ),
         ]),
       );
 
       
+}
+
+Widget _buildHeader() {
+  if(_isLoading) {
+    return Center(
+      child: CircularProgressIndicator(),
+    );
+  } else {
+    return const Text('Sign in', style: TextStyle(fontSize: 35, fontWeight: FontWeight.w600),textAlign: TextAlign.center,);
+  }
 }
 }
