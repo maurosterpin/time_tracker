@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:time_tracker/views/screens/auth/email_sign_in_page.dart';
 import 'package:time_tracker/widgets/sign_in_button.dart';
 import '../../../services/auth.dart';
-import '../../../services/auth_provider.dart';
 import '../../../widgets/social_sign_in_button.dart';
 
 class SignInPage extends StatelessWidget {
 
   Future <void> _signInAnonymously(BuildContext context) async {
-    final auth = AuthProvider.of(context);
+    final auth = Provider.of<AuthBase>(context, listen: false);
     await auth.signInAnonymously();
   }
 
   Future <void> _signInWithGoogle(BuildContext context) async {
-    final auth = AuthProvider.of(context);
+    final auth = Provider.of<AuthBase>(context, listen: false);
     await auth.signInWithGoogle();
   }
 
    Future <void> _signInWithFacebook(BuildContext context) async {
-     final auth = AuthProvider.of(context);
+     final auth = Provider.of<AuthBase>(context, listen: false);
     await auth.signInWithFacebook();
   }
 
