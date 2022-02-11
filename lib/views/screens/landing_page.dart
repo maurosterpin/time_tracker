@@ -18,8 +18,7 @@ class LandingPage extends StatelessWidget {
            if(user == null) {
             return SignInPage.create(context);
           } 
-            return HomePage();
-            
+            return HomePage();   
           } 
             return const Scaffold(
               body: Center(
