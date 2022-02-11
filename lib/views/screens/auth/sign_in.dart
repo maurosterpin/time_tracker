@@ -9,10 +9,14 @@ import '../../../services/auth.dart';
 import '../../../widgets/social_sign_in_button.dart';
 
 class SignInPage extends StatelessWidget {
+  const SignInPage({Key? key, required this.bloc}) : super(key: key);
+  final SignInBloc bloc;
+
   static Widget create(BuildContext context) {
     return Provider<SignInBloc>(
       create: (_) => SignInBloc(),
-      child: SignInPage(),
+      dispose: (_, bloc) => bloc.dispose(),
+      child: Consumer<SignInBloc>(builder: (_, bloc, __) => SignInPage(bloc: bloc)),
     );
   }
   
@@ -23,7 +27,6 @@ class SignInPage extends StatelessWidget {
   }
 
   Future <void> _signInAnonymously(BuildContext context) async {
-      final bloc = Provider.of<SignInBloc>(context, listen: false);
     try {
       bloc.setIsLoading(true);
     final auth = Provider.of<AuthBase>(context, listen: false);
@@ -36,7 +39,6 @@ class SignInPage extends StatelessWidget {
   }
 
   Future <void> _signInWithGoogle(BuildContext context) async {
-    final bloc = Provider.of<SignInBloc>(context, listen: false);
     try {
        bloc.setIsLoading(true);
     final auth = Provider.of<AuthBase>(context, listen: false);
@@ -49,7 +51,6 @@ class SignInPage extends StatelessWidget {
   }
 
    Future <void> _signInWithFacebook(BuildContext context) async {
-     final bloc = Provider.of<SignInBloc>(context, listen: false);
      try {
         bloc.setIsLoading(true);
      final auth = Provider.of<AuthBase>(context, listen: false);
@@ -72,10 +73,9 @@ class SignInPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bloc = Provider.of<SignInBloc>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Time Tracker'),
+        title: const Text('Time Tracker'),
         elevation: 2,
       ),
       body: StreamBuilder<bool>(
@@ -91,7 +91,7 @@ class SignInPage extends StatelessWidget {
 
 Widget _buildContent(BuildContext context, bool? isLoading) {
   return Padding(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -105,7 +105,7 @@ Widget _buildContent(BuildContext context, bool? isLoading) {
             color: Colors.white,
             onPressed: isLoading ? () => null : () => _signInWithGoogle(context),
           ), 
-          SizedBox(height: 8,),
+          const SizedBox(height: 8,),
           SocialSignInButton(
             text: 'Sign in with Facebook',
             assetName: 'assets/facebook-logo.png',
@@ -113,21 +113,21 @@ Widget _buildContent(BuildContext context, bool? isLoading) {
             color: Color(0xFF334D92),
             onPressed: isLoading ? () => null : () => _signInWithFacebook(context),
           ),
-          SizedBox(height: 8,),
+          const SizedBox(height: 8,),
           SignInButton(
             text: 'Sign in with Email',
             textColor: Colors.white,
             color: Color.fromARGB(255, 51, 146, 87),
             onPressed: isLoading ? () => null : () => _signInWithEmail(context),
           ),
-          SizedBox(height: 8,),
-          Text(
+          const SizedBox(height: 8,),
+          const Text(
             'or',
             style: TextStyle(fontSize: 14.0, color: Colors.black87),
             textAlign: TextAlign.center,
             
           ),
-          SizedBox(height: 8,),
+          const SizedBox(height: 8,),
           SignInButton(
             text: 'Go Anonymus',
             textColor: Colors.black,
@@ -142,7 +142,7 @@ Widget _buildContent(BuildContext context, bool? isLoading) {
 
 Widget _buildHeader(bool isLoading) {
   if(isLoading) {
-    return Center(
+    return const Center(
       child: CircularProgressIndicator(),
     );
   } else {
