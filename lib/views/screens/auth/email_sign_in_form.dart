@@ -7,6 +7,8 @@ import 'package:time_tracker/services/auth.dart';
 import 'package:time_tracker/widgets/form_submit_button.dart';
 import 'package:time_tracker/widgets/showAlertDialog.dart';
 
+import '../../../widgets/show_exception_alert_dialog.dart';
+
 enum EmailSignInFormType { signIn, register }
 
 class EmailSignInForm extends StatefulWidget {
@@ -39,7 +41,7 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
     }
     Navigator.of(context).pop();
     } on FirebaseAuthException catch (e) {
-      showAlertDialog(context, title: 'Sign in failed', contant: e.message.toString(), defaultActionText: 'OK');
+      showExceptionAlertDialog(context, title: 'Sign in failed', exception: e);
     } finally {
       setState(() {
         _isLoading = false;
