@@ -2,12 +2,19 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:time_tracker/views/screens/auth/email_sign_in_page.dart';
+import 'package:time_tracker/views/screens/auth/sign_in_block.dart';
 import 'package:time_tracker/widgets/show_exception_alert_dialog.dart';
 import 'package:time_tracker/widgets/sign_in_button.dart';
 import '../../../services/auth.dart';
 import '../../../widgets/social_sign_in_button.dart';
 
 class SignInPage extends StatefulWidget {
+  static Widget create(BuildContext context) {
+    return Provider<SignInBloc>(
+      create: (_) => SignInBloc(),
+      child: SignInPage(),
+    );
+  }
   @override
   State<SignInPage> createState() => _SignInPageState();
 }
