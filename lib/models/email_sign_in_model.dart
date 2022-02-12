@@ -11,7 +11,7 @@ class EmailSignInModel {
 
   final String email;
   final String password;
-  final EmailSignInFormType formType;
+  late final EmailSignInFormType formType;
   final bool isLoading;
   final bool submitted;
 
