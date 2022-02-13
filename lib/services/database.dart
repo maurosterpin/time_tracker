@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:time_tracker/services/api_path.dart';
 
 import '../models/job.dart';
 
@@ -12,7 +13,7 @@ class FirestoreDatabase implements Database {
   final String uid;
 
   Future <void> createJob(Job job) async {
-    final path = '/users/$uid/jobs/job_abc';
+    final path = APIPath.job(uid, 'job_abc');
     final documentReference = FirebaseFirestore.instance.doc(path);
     await documentReference.set(job.toMap());
   }
