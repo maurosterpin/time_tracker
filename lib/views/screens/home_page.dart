@@ -71,7 +71,6 @@ class HomePage extends StatelessWidget {
         }
         return const Center(child: CircularProgressIndicator(),);
       },
-      );
+    );
   }
-
 }
