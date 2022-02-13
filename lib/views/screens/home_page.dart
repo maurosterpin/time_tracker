@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:time_tracker/models/job.dart';
 import 'package:time_tracker/widgets/showAlertDialog.dart';
 import '../../services/auth.dart';
 import '../../services/database.dart';
@@ -16,7 +17,7 @@ class HomePage extends StatelessWidget {
       context, 
       title: 'Logout', 
       contant: 'Are you sure you want to logout?', 
-      defaultActionText: 'Logout',
+      defaultActionText: 'Logout', 
       cancelActionText: 'Cancel'
       );
       if(didRequestSignOut == true) {
@@ -25,10 +26,7 @@ class HomePage extends StatelessWidget {
   }
   Future <void> _createJob(BuildContext context) async {
     final database =  Provider.of<Database>(context, listen: false);
-    await database.createJob({
-      'name': 'Blogging',
-      'ratePerHour' : 10,
-    });
+    await database.createJob(Job(name: 'Blogging', ratePerHour: 10));
   }
 
   @override
