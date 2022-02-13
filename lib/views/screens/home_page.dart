@@ -27,7 +27,7 @@ class HomePage extends StatelessWidget {
       }
   }
   Future <void> _createJob(BuildContext context) async {
-    try {
+    try { 
     final database =  Provider.of<Database>(context, listen: false);
     await database.createJob(Job(name: 'Blogging', ratePerHour: 10));
     } on FirebaseException catch (e) {
@@ -51,8 +51,27 @@ class HomePage extends StatelessWidget {
           ),
         ],
       ),
+      body: _buildContents(context),
       floatingActionButton: FloatingActionButton(onPressed: () => _createJob(context), child: Icon(Icons.add),),
     );
+  }
+
+  Widget _buildContents(BuildContext context) {
+    final database = Provider.of<Database>(context, listen: false);
+    return StreamBuilder<Iterable<Job>>(
+      stream: database.jobsStream(),
+      builder: (context, snapshot) {
+        if(snapshot.hasData) {
+          final jobs = snapshot.data;
+          final children = jobs?.map((job) => Text(job.name)).toList();
+          return ListView(children: children!,);
+        }
+        if(snapshot.hasError) {
+          return Center(child: Text('Error occured'),);
+        }
+        return const Center(child: CircularProgressIndicator(),);
+      },
+      );
   }
 
 }
