@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:time_tracker/services/auth.dart';
 import 'package:time_tracker/services/email_sign_in_form_bloc_based.dart';
 
 import 'email_sign_in_form.dart';

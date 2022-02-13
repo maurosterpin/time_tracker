@@ -6,6 +6,7 @@ import 'package:time_tracker/services/database.dart';
 import 'package:time_tracker/views/screens/auth/sign_in.dart';
 import 'package:time_tracker/views/screens/home_page.dart';
 
+
 class LandingPage extends StatelessWidget {
  
   @override
