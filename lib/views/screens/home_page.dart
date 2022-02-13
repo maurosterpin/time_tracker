@@ -23,12 +23,15 @@ class HomePage extends StatelessWidget {
         _signOut(context);
       }
   }
+  void _createJob() {
+    
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home Page',),
+        title: Text('Jobs',),
         actions: <Widget>[
           FlatButton(
             child: Text('Logout', style: TextStyle(color: Colors.white, fontSize: 18),),
@@ -36,6 +39,8 @@ class HomePage extends StatelessWidget {
           ),
         ],
       ),
+      floatingActionButton: FloatingActionButton(onPressed: _createJob, child: Icon(Icons.add),),
     );
   }
+
 }
