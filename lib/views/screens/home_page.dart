@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:time_tracker/models/job.dart';
+import 'package:time_tracker/views/screens/add_job_page.dart';
 import 'package:time_tracker/widgets/showAlertDialog.dart';
 import 'package:time_tracker/widgets/show_exception_alert_dialog.dart';
 import '../../services/auth.dart';
@@ -52,7 +53,7 @@ class HomePage extends StatelessWidget {
         ],
       ),
       body: _buildContents(context),
-      floatingActionButton: FloatingActionButton(onPressed: () => _createJob(context), child: Icon(Icons.add),),
+      floatingActionButton: FloatingActionButton(onPressed: () => AddJobPage.show(context), child: Icon(Icons.add),),
     );
   }
 
