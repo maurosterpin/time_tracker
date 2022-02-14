@@ -1,12 +1,21 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:time_tracker/services/database.dart';
+import 'package:time_tracker/widgets/show_exception_alert_dialog.dart';
+
+import '../../models/job.dart';
 
 class AddJobPage extends StatefulWidget {
-  const AddJobPage({ Key? key }) : super(key: key);
+  const AddJobPage({ Key? key, required this.database }) : super(key: key);
+
+  final Database database;
 
   static Future<void> show(BuildContext context) async {
+    final database = Provider.of<Database>(context, listen: false);
     await Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => AddJobPage(), 
+        builder: (context) => AddJobPage(database: database,), 
         fullscreenDialog: true
       ),
     );
@@ -20,8 +29,8 @@ class _AddJobPageState extends State<AddJobPage> {
 
   final _formKey = GlobalKey<FormState>();
 
-  String? _name;
-  int? _ratePerHour;
+  late String _name;
+  late int _ratePerHour;
 
   bool _validateAndSaveForm() {
     final form = _formKey.currentState;
@@ -32,10 +41,19 @@ class _AddJobPageState extends State<AddJobPage> {
     return false;
   }
 
-  void _submit() {
+  Future<void> _submit() async {
     if(_validateAndSaveForm()) {
-      print('form saved, name: $_name, ratePerHour: $_ratePerHour');
-    // TODO: Submit data to firestore
+      try {
+      final job = Job(name: _name, ratePerHour: _ratePerHour);
+      await widget.database.createJob(job);
+      Navigator.of(context).pop();
+      } on FirebaseException catch (e) {
+        showExceptionAlertDialog(
+          context, 
+          title: 'Operation failed', 
+          exception: e
+        );
+      }
     }
   }
 
@@ -83,7 +101,7 @@ class _AddJobPageState extends State<AddJobPage> {
       TextFormField(
         decoration: InputDecoration(labelText: 'Job name'),
         validator: (value) => value!.isNotEmpty ? null : 'Name can\'t be empty',
-        onSaved: (value) => _name = value,
+        onSaved: (value) => _name = value!,
       ),
       TextFormField(
         decoration: InputDecoration(labelText: 'Rate per hour'),
